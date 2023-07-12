@@ -4,45 +4,30 @@ const three = document.querySelector(".three");
 const four = document.querySelector(".four");
 const five = document.querySelector(".five");
 
-// Event listeners for progress bar clicks
-one.addEventListener("click", function() {
-    updateProgressBar(1);
-});
-
-two.addEventListener("click", function() {
-    updateProgressBar(2);
-});
-
-three.addEventListener("click", function() {
-    updateProgressBar(3);
-});
-
-four.addEventListener("click", function() {
-    updateProgressBar(4);
-});
-
-five.addEventListener("click", function() {
-    updateProgressBar(5);
-});
-
 // Load CSV data on window load
 window.addEventListener("load", function() {
+    console.log("Window loaded");
+
     Papa.parse("data.csv", {
         header: true,
         download: true,
         complete: function(results) {
+            console.log("CSV data parsed");
             const data = results.data;
             const urlParams = new URLSearchParams(window.location.search);
             const orderId = urlParams.get("orderId");
+            console.log("Order ID from URL:", orderId);
 
             // Find the matching order in the CSV data
             const order = data.find(item => item.OrderID === orderId);
             if (order) {
                 const orderStatus = order.OrderStatus;
+                console.log("Order status from CSV:", orderStatus);
                 const statusIndex = getStatusIndex(orderStatus);
                 if (statusIndex > 0) {
                     // Update progress bar based on the status index
                     updateProgressBar(statusIndex);
+                    console.log("Progress bar updated");
                 }
             }
         }
