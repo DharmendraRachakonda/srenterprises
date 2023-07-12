@@ -1,4 +1,5 @@
-import Papa from "papaparse";
+// Remove this line
+// import Papa from "papaparse";
 
 document.addEventListener("DOMContentLoaded", function() {
     const one = document.querySelector(".one");
