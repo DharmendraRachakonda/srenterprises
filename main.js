@@ -11,12 +11,15 @@ window.addEventListener("load", function() {
         .then(response => response.text())
         .then(data => {
             console.log("CSV data fetched");
+            console.log("CSV data:", data);
             const parsedData = parseCSVData(data);
+            console.log("Parsed data:", parsedData);
             const urlParams = new URLSearchParams(window.location.search);
             const orderId = urlParams.get("orderId");
             console.log("Order ID from URL:", orderId);
 
-            const order = parsedData.find(item => item.OrderID.toLowerCase() === orderId.toLowerCase());
+            const order = parsedData.find(item => item.OrderID === orderId);
+            console.log("Order:", order);
             if (order) {
                 const orderStatus = order.OrderStatus;
                 console.log("Order status from CSV:", orderStatus);
