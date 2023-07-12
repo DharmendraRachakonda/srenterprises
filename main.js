@@ -3,59 +3,8 @@ const two = document.querySelector(".two");
 const three = document.querySelector(".three");
 const four = document.querySelector(".four");
 const five = document.querySelector(".five");
-const notactive = document.querySelector(".notactive");
 
-const customerId = window.location.href.split("/")[4];
-const orderId = window.location.href.split("/")[5];
-
-one = function() {
-    one.classList.add("active");
-    two.classList.remove("active");
-    three.classList.remove("active");
-    four.classList.remove("active");
-    five.classList.remove("active");
-};
-
-two = function() {
-    one.classList.add("active");
-    two.classList.add("active");
-    three.classList.remove("active");
-    four.classList.remove("active");
-    five.classList.remove("active");
-};
-three = function() {
-    one.classList.add("active");
-    two.classList.add("active");
-    three.classList.add("active");
-    four.classList.remove("active");
-    five.classList.remove("active");
-};
-four = function() {
-    one.classList.add("active");
-    two.classList.add("active");
-    three.classList.add("active");
-    four.classList.add("active");
-    five.classList.remove("active");
-};
-five = function() {
-    one.classList.add("active");
-    two.classList.add("active");
-    three.classList.add("active");
-    four.classList.add("active");
-    five.classList.add("active");
-};
-
-notactive = function() {
-    one.classList.remove("active");
-    two.classList.remove("active");
-    three.classList.remove("active");
-    four.classList.remove("active");
-    five.classList.remove("active");
-};
-
-
-
-const getOrderStatus = function() {
+const getOrderStatus = function(orderId) {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "/orders.csv");
   xhr.responseType = "text";
@@ -64,33 +13,32 @@ const getOrderStatus = function() {
     const orders = csvData.split("\n");
     for (const order of orders) {
       const columns = order.split(",");
-      const orderStatus = columns[2];
-
-      // Check if the order ID matches the current order ID
-      if (orderId === columns[1]) {
-        // Update the progress bar
-        if (orderStatus === "Order Confirmed") {
-          one();
-        }
-        if (orderStatus === "Enroute to Load Zone") {
-          two();
-        }
-        if (orderStatus === "Material Loaded") {
-          three();
-        }
-        if (orderStatus === "Enroute to Offload Zone") {
-          four();
-        }
-        if (orderStatus === "Order Delivered") {
-          five();
-        }
-        else {
-          notactive();
-        }
+      if (columns[1] === orderId) {
+        const orderStatus = columns[2];
+        updateProgress(orderStatus);
       }
     }
   };
   xhr.send();
 };
 
-window.onload = getOrderStatus;
+const updateProgress = function(orderStatus) {
+  switch (orderStatus) {
+    case "Order Confirmed":
+      one.classList.add("active");
+      break;
+    case "Enroute to Load Zone":
+      two.classList.add("active");
+      break;
+    case "Material Loaded":
+      three.classList.add("active");
+      break;
+    case "Enroute to Offload Zone":
+      four.classList.add("active");
+      break;
+    case "Order Delivered":
+      five.classList.add("active");
+      break;
+    default:
+      break;
+  }
