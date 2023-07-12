@@ -16,7 +16,7 @@ window.addEventListener("load", function() {
             const orderId = urlParams.get("orderId");
             console.log("Order ID from URL:", orderId);
 
-            const order = parsedData.find(item => item.OrderID == orderId);
+            const order = parsedData.find(item => item.OrderID.toLowerCase() === orderId.toLowerCase());
             if (order) {
                 const orderStatus = order.OrderStatus;
                 console.log("Order status from CSV:", orderStatus);
