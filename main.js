@@ -8,7 +8,7 @@ const five = document.querySelector(".five");
 window.addEventListener("load", function() {
     console.log("Window loaded");
 
-    Papa.parse("data.csv", {
+    Papa.parse("orders.csv", {
         header: true,
         download: true,
         complete: function(results) {
