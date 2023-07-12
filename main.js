@@ -16,9 +16,9 @@ window.addEventListener("load", function() {
             const orderId = urlParams.get("orderId");
             console.log("Order ID from URL:", orderId);
 
-            const order = parsedData.find(item => item.OrderID === orderId);
+            const order = parsedData.find(item => item.OrderID == orderId);
             if (order) {
-                const orderStatus = parseInt(order.OrderStatus);
+                const orderStatus = order.OrderStatus;
                 console.log("Order status from CSV:", orderStatus);
                 const statusIndex = getStatusIndex(orderStatus);
                 if (statusIndex > 0) {
@@ -52,10 +52,20 @@ function parseCSVData(csvData) {
 }
 
 function getStatusIndex(status) {
-    if (status >= 1 && status <= 5) {
-        return status;
+    switch (status) {
+        case "1":
+            return 1;
+        case "2":
+            return 2;
+        case "3":
+            return 3;
+        case "4":
+            return 4;
+        case "5":
+            return 5;
+        default:
+            return 0;
     }
-    return 0;
 }
 
 function updateProgressBar(index) {
