@@ -3,6 +3,7 @@ const two = document.querySelector(".two");
 const three = document.querySelector(".three");
 const four = document.querySelector(".four");
 const five = document.querySelector(".five");
+const Papa = require('./lib/papaparse.min.js');
 
 // Load CSV data on window load
 window.addEventListener("load", function() {
