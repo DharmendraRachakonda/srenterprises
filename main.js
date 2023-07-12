@@ -1,3 +1,5 @@
+import Papa from "papaparse";
+
 document.addEventListener("DOMContentLoaded", function() {
     const one = document.querySelector(".one");
     const two = document.querySelector(".two");
