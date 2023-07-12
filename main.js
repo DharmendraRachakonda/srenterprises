@@ -45,7 +45,8 @@ function parseCSVData(csvData) {
         if (fields.length === headers.length) {
             const item = {};
             for (let j = 0; j < headers.length; j++) {
-                item[headers[j]] = fields[j];
+                const field = fields[j].replace(/"/g, ""); // Remove quotes from the field value
+                item[headers[j]] = field;
             }
             parsedData.push(item);
         }
