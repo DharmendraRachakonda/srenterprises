@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
 
             const order = parsedData.find(item => item.OrderID === orderId);
             if (order) {
-                const orderStatus = order.OrderStatus;
+                const orderStatus = parseInt(order.OrderStatus);
                 console.log("Order status from CSV:", orderStatus);
                 const statusIndex = getStatusIndex(orderStatus);
                 if (statusIndex > 0) {
@@ -52,20 +52,10 @@ function parseCSVData(csvData) {
 }
 
 function getStatusIndex(status) {
-    switch (status) {
-        case "Order Confirmed":
-            return 1;
-        case "Enroute to Load Zone":
-            return 2;
-        case "Material Loaded":
-            return 3;
-        case "Enroute to Offload Zone":
-            return 4;
-        case "Order Delivered":
-            return 5;
-        default:
-            return 0;
+    if (status >= 1 && status <= 5) {
+        return status;
     }
+    return 0;
 }
 
 function updateProgressBar(index) {
