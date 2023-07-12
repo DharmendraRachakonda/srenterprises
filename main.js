@@ -44,16 +44,16 @@ function parseCSVData(csvData) {
         const fields = lines[i].split(",");
         if (fields.length === headers.length) {
             const item = {};
-            for (let j = 0; j < headers.length; j++) {
-                const field = fields[j].replace(/"/g, ""); // Remove quotes from the field value
-                item[headers[j]] = field;
-            }
+            item.OrderID = fields[1];
+            item.OrderStatus = fields[2];
+            item.Customer = fields[3];
             parsedData.push(item);
         }
     }
 
     return parsedData;
 }
+
 
 function getStatusIndex(status) {
     switch (status) {
