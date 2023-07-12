@@ -1,7 +1,7 @@
-C00001,O100001,"Order Confirmed","Siva"
-C00001,O100002,"Enroute to Load Zone","Siva"
-C00001,O100003,"Material Loaded","Siva"
-C00001,O100004,"Enroute to Offload Zone","Siva"
-C00001,O100005,"Order Delivered","Siva"
+C00001,O100001,1,"Siva"
+C00001,O100002,2,"Siva"
+C00001,O100003,3,"Siva"
+C00001,O100004,4,"Siva"
+C00001,O100005,5,"Siva"
 
 
