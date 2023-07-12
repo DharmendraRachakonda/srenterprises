@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
             const orderId = urlParams.get("orderId");
             console.log("Order ID from URL:", orderId);
 
-            const order = parsedData.find(item => item.OrderID === orderId);
+            const order = parsedData.find(item => item["O100001"] === orderId);
             console.log("Order:", order);
             if (order) {
                 const orderStatus = order.OrderStatus;
