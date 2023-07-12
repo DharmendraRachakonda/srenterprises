@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // Your code here
 const one = document.querySelector(".one");
 const two = document.querySelector(".two");
 const three = document.querySelector(".three");
@@ -93,3 +95,7 @@ function updateProgressBar(index) {
             break;
     }
 }
+
+
+});
+
