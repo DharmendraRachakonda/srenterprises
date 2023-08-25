@@ -1,0 +1,157 @@
+[iag_dev]
+OPCITSNAL00WL ansible_host=10.38.32.25
+OPCITSAPL0044 ansible_host=10.203.224.52
+OPCITSEUL009P ansible_host=10.166.32.154
+ 
+[iag_qa]
+OPCITSEUL003K ansible_host=10.166.32.137
+OPCITSEUL003H ansible_host=10.166.32.134
+OPCITSEUL003L ansible_host=10.166.32.138
+OPCITSAPL002L ansible_host=10.203.224.39
+OPCITSAPL002K ansible_host=10.203.224.42
+OPCITSAPL002J ansible_host=10.203.224.43
+OPCITSNAL00IU ansible_host=10.38.32.160
+OPCITSNAL00IV ansible_host=10.38.32.162
+OPCITSNAL00IW ansible_host=10.38.32.161
+ 
+[iag_prod]
+OPCITSEUL004C ansible_host=10.166.32.94
+OPCITSEUL004E ansible_host=10.166.32.123
+OPCITSEUL004D ansible_host=10.166.32.95
+OPCITSAPL002M ansible_host=10.203.224.44
+OPCITSAPL002N ansible_host=10.203.224.46
+OPCITSAPL002O ansible_host=10.203.224.45
+OPCITSNAL00IR ansible_host=10.38.32.157
+OPCITSNAL00IT ansible_host=10.38.32.158
+OPCITSNAL00IS ansible_host=10.38.32.159
+ 
+[iap_prod]
+OPCITSEUL0041 ansible_host=10.166.32.125
+OPCITSEUL0049 ansible_host=10.166.32.132
+OPCITSEUL0048 ansible_host=10.166.32.131
+ 
+[iap_qa]
+OPCITSEUL003Q ansible_host=10.166.32.143
+OPCITSEUL003P ansible_host=10.166.32.142
+OPCITSEUL003G ansible_host=10.166.32.133
+ 
+[iap_dev_old]
+OPCITSNAL00GH ansible_host=10.38.32.249
+ 
+[iap_dev]
+OPCITSNAL00ZF ansible_host=10.38.32.86
+OPCITSNAL013W ansible_host=10.38.32.146
+OPCITSNAL013V ansible_host=10.38.32.133
+ 
+[mongo_dev_old]
+OPCITSNAL00GG ansible_host=10.166.32.248
+ 
+[mongo_dev]
+OPCITSNAL00ZH ansible_host=10.166.32.87
+OPCITSNAL013P ansible_host=10.166.32.127
+OPCITSNAL013O ansible_host=10.166.32.128
+ 
+[mongo_qa]
+OPCITSEUL003O ansible_host=10.166.32.141
+OPCITSEUL003R ansible_host=10.166.32.147
+OPCITSEUL003U ansible_host=10.166.32.146
+ 
+[mongo_prod]
+OPCITSEUL0043 ansible_host=10.166.32.127
+OPCITSEUL004A ansible_host=10.166.32.92
+OPCITSEUL0042 ansible_host=10.166.32.126
+ 
+[redis_dev_old]
+OPCITSNAL00GH ansible_host=10.166.32.249
+ 
+[redis_dev]
+OPCITSNAL00ZH ansible_host=10.166.32.88
+ 
+[redis_qa]
+OPCITSEUL003T ansible_host=10.166.32.145
+OPCITSEUL003S ansible_host=10.166.32.144
+OPCITSEUL003I ansible_host=10.166.32.135
+ 
+[redis_prod]
+OPCITSEUL0046 ansible_host=10.166.32.129
+OPCITSEUL0044 ansible_host=10.166.32.148
+OPCITSEUL0045 ansible_host=10.166.32.128
+ 
+[rabbit_dev_old]
+OPCITSNAL00GH ansible_host=10.166.32.249
+ 
+[rabbit_dev]
+OPCITSNAL00ZH ansible_host=10.166.32.88
+ 
+[rabbit_qa]
+OPCITSEUL003J ansible_host=10.166.32.136
+OPCITSEUL003M ansible_host=10.166.32.139
+OPCITSEUL003N ansible_host=10.166.32.140
+ 
+[rabbit_prod]
+OPCITSEUL0047 ansible_host=10.166.32.130
+OPCITSEUL004F ansible_host=10.166.32.124
+OPCITSEUL004B ansible_host=10.166.32.93
+ 
+[all_dev:children]
+iap_dev
+iag_dev
+mongo_dev
+redis_dev
+rabbit_dev
+ 
+[all_qa:children]
+iap_qa
+iag_qa
+mongo_qa
+redis_qa
+rabbit_qa
+ 
+[all_prod:children]
+iap_prod
+iag_prod
+mongo_prod
+redis_prod
+rabbit_prod
+ 
+[iap:children]
+iap_qa
+iap_dev
+iap_prod
+iap_dev_old
+ 
+[iag:children]
+iag_qa
+iag_dev
+iag_test
+iag_prod
+ 
+[mongo:children]
+mongo_qa
+mongo_dev
+mongo_prod
+mongo_dev_old
+ 
+[redis:children]
+redis_qa
+redis_dev
+redis_prod
+redis_dev_old
+ 
+[rabbit:children]
+rabbit_qa
+rabbit_dev
+rabbit_prod
+rabbit_dev_old
+ 
+[allComponents:children]
+redis
+rabbit
+mongo
+iap
+iag
+ 
+[allComponents:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_ssh_user='itential'
+#ansible_become_user=root
